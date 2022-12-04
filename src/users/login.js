@@ -3,8 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {loginThunk, registerThunk} from "./users-thunks";
 
 const Login = () => {
-    const [username, setUsername] = useState('dan')
-    const [password, setPassword] = useState('dan123')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
     const {currentUser} = useSelector((state) => state.users)
     const dispatch = useDispatch()
@@ -15,7 +15,8 @@ const Login = () => {
     }
     return(
         <>
-            <h1>Login</h1>
+            <div className="form_wrapper">
+            <h1 className="sign">Login</h1>
             {
                 error &&
                 <div className="alert alert-danger">
@@ -23,22 +24,25 @@ const Login = () => {
                 </div>
             }
             <input
-                className="form-control mb-2"
+                className="un mb-2"
                 value={username}
+                placeholder="username"
                 onChange={(e) => setUsername(e.target.value)}/>
             <input
-                className="form-control mb-2"
+                className="un mb-2"
                 value={password}
+                placeholder="password"
                 onChange={(e) => setPassword(e.target.value)}/>
             <button
                 onClick={handleLoginBtn}
-                className="btn btn-primary w-100">
+                className="loginbtn">
                 Login
             </button>
             {
                 currentUser &&
                 <h2>Welcome {currentUser.username}</h2>
             }
+            </div>
         </>
     )
 }
