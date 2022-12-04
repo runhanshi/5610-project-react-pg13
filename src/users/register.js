@@ -8,6 +8,9 @@ const Register = () => {
     const [lastname, setLastname] = useState('')
     const [usertype, setUsertype] = useState('')
     const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
+    const [dateofbirth, setDateofBirth] = useState('')
+
     const [password, setPassword] = useState('')
     const [validatePassword, setValidatePassword] = useState('')
     const [error, setError] = useState(null)
@@ -19,18 +22,17 @@ const Register = () => {
             return
         }
         setError(null)
-        const newUser = {username, usertype, firstname,lastname,email,password}
+        const newUser = {username, usertype, firstname,lastname,email,phone, dateofbirth,password}
         dispatch(registerThunk(newUser))
     }
     return(
         <>
-
-                <h3>Sign Up</h3>
+            <div className="form_wrapper">
+                <h3 className="sign">Sign Up</h3>
                 <div className="mb-3">
-                    <label>Username</label>
                     <input
                         type="text"
-                        className="form-control"
+                        className="un"
                         placeholder="Username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
@@ -38,7 +40,7 @@ const Register = () => {
                 </div>
 
                 <div className="mb-3">
-                    <label>Usertype</label>
+                    <label className="usertypeselect">&nbsp; Please choose your Usertype(select one)</label>
                     <select id="select-usertype" value={usertype} onChange={(e) => {
                         setUsertype(e.target.value )}}>
                         <option defaultValue="CUSTOMER">Customer</option>
@@ -48,21 +50,19 @@ const Register = () => {
 
                 </div>
                 <div className="mb-3">
-                    <label>First name</label>
                     <input
                         type="text"
-                        className="form-control"
-                        placeholder="First name"
+                        className="un"
+                        placeholder="Firstname"
                         value={firstname}
                         onChange={(e) => setFirstname( e.target.value )}
                     />
                 </div>
 
                 <div className="mb-3">
-                    <label>Last name</label>
                     <input
                         type="text"
-                        className="form-control"
+                        className="un"
                         placeholder="Last name"
                         value={lastname}
                         onChange={(e) => setLastname(  e.target.value )}
@@ -70,21 +70,39 @@ const Register = () => {
                 </div>
 
                 <div className="mb-3">
-                    <label>Email address</label>
                     <input
                         type="email"
-                        className="form-control"
-                        placeholder="Enter email"
+                        className="un"
+                        placeholder="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value )}
                     />
                 </div>
 
                 <div className="mb-3">
-                    <label>Password</label>
+                    <input
+                        type="text"
+                        className="un"
+                        placeholder="phonenumber"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value )}
+                    />
+                </div>
+
+                <div className="mb-3">
+                    <input
+                        type="date"
+                        className="un"
+                        placeholder="Enter DateOfBirth"
+                        value={dateofbirth}
+                        onChange={(e) => setDateofBirth(e.target.value )}
+                    />
+                </div>
+
+                <div className="mb-3">
                     <input
                         type="password"
-                        className="form-control"
+                        className="un"
                         placeholder="Enter password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value )}
@@ -92,11 +110,10 @@ const Register = () => {
                 </div>
 
             <div className="mb-3">
-                <label>Password</label>
                 <input
                     type="password"
-                    className="form-control"
-                    placeholder="Enter password"
+                    className="un"
+                    placeholder="Validate password"
                     value={validatePassword}
                     onChange={(e) => setValidatePassword(e.target.value )}
                 />
@@ -104,18 +121,19 @@ const Register = () => {
 
                 <button
                     onClick={handleRegisterBtn}
-                    className="btn btn-primary w-100">
+                    className="registerbtn">
                     Register
                 </button>
-                <p className="forgot-password text-right">
+                <p className="alreadysignup">
                     Already registered <a href="/sign-in">sign in?</a>
                 </p>
-
+            </div>
             {/*{*/}
             {/*    currentUser &&*/}
             {/*    <h2>Welcome {currentUser.username}</h2>*/}
             {/*}*/}
         </>
+
     )
 }
 
