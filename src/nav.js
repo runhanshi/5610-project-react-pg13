@@ -1,6 +1,6 @@
-import {Link} from "react-router-dom";
-import {useLocation} from "react-router";
-import {useSelector} from "react-redux";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router";
+import { useSelector } from "react-redux";
 
 // function Nav() {
 //     return (
@@ -13,9 +13,9 @@ import {useSelector} from "react-redux";
 //
 // export default Nav;
 
-const Nav= () => {
-    const {currentUser} = useSelector((state) => state.users)
-    const {pathname} = useLocation()
+const Nav = () => {
+    const { currentUser } = useSelector((state) => state.users)
+    const { pathname } = useLocation()
     const parts = pathname.split('/')
     console.log(parts)
 
@@ -30,11 +30,11 @@ const Nav= () => {
         screens.push('register')
     }
 
-    return(
+    return (
         <ul className="nav nav-pills">
             <li className="nav-item">
                 <Link to="/"
-                      className={`nav-link ${parts[1] === ''?'active': ''}`}>
+                    className={`nav-link ${parts[1] === '' ? 'active' : ''}`}>
                     Home
                 </Link>
             </li>
@@ -42,12 +42,19 @@ const Nav= () => {
                 screens.map((screen) =>
                     <li className="nav-item">
                         <Link to={`/${screen}`}
-                              className={`nav-link ${parts[1] === screen?'active': ''}`}>
+                            className={`nav-link ${parts[1] === screen ? 'active' : ''}`}>
                             <span className="text-capitalize">{screen}</span>
                         </Link>
                     </li>
                 )
             }
+            <li className="nav-item">
+                <Link to="/search"
+                    className={`nav-link ${parts[1] === 'search' ? 'active' : ''}`}>
+                    Search
+                </Link>
+            </li>
+
         </ul>
     )
 }
