@@ -1,44 +1,40 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {profileThunk, logoutThunk, findAllUsersThunk, loginThunk, registerThunk} from "./users-thunks";
+import {
+
+    loginThunk,
+    logoutThunk,
+    profileThunk,
+    registerThunk,
+} from "./users-thunks.js";
 
 const usersReducer = createSlice({
     name: 'users',
     initialState: {
-        loading: false,
         users: [],
+        loading: false,
         currentUser: null,
-        error: null
-    },
-    reducers: {
+        publicProfile: null
     },
     extraReducers: {
-        [findAllUsersThunk.fulfilled]: (state, action) => {
-            state.users = action.payload
-        },
-        [loginThunk.fulfilled]: (state, action) => {
-            state.currentUser = action.payload
-        },
-        [loginThunk.rejected]: (state, action) => {
-            state.error = action.payload
-            state.currentUser = null
-        },
-        [registerThunk.fulfilled]: (state, action) => {
-            state.currentUser = action.payload
-        },
-        [registerThunk.rejected]: (state, action) => {
-            state.error = action.payload
-            state.currentUser = null
-        },
+        // [findUserByIdThunk.fulfilled]: (state, action) => {
+        //     state.publicProfile = action.payload
+        // },
         [logoutThunk.fulfilled]: (state, action) => {
             state.currentUser = null
         },
         [profileThunk.fulfilled]: (state, action) => {
             state.currentUser = action.payload
         },
-        [profileThunk.rejected]: (state, action) => {
-            state.error = action.payload
-            state.currentUser = null
+        [registerThunk.fulfilled]: (state, action) => {
+            state.currentUser = action.payload
         },
+        [loginThunk.fulfilled]: (state, action) => {
+            state.currentUser = action.payload
+        },
+        // [findAllUsersThunk.fulfilled]: (state, action) => {
+        //     state.users = action.payload
+        //     state.loading = false
+        // }
     }
 })
 
