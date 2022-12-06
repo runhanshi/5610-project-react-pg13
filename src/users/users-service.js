@@ -14,6 +14,7 @@ export const findUserById = async (uid) => {
 export const register = async (user) => {
     const response = await api.post(`${BASE_API_URL}/register`, user)
     const newUser = response.data
+    console.log('register success')
     console.log(newUser)
     return newUser
 }
