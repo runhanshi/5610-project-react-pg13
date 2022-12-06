@@ -14,9 +14,9 @@ const extRecipeReducer = createSlice({
         [findRecipeBySearchKeyThunk.fulfilled]: (state, action) => {
             state.recipes = action.payload
         },
-        //       [findRecipeByIdThunk.fulfilled]: (state, action) => {
-        //           state.details = action.payload
-        //     }
+        [findRecipeByIdThunk.fulfilled]: (state, action) => {
+            state.details = action.payload
+        }
     }
 })
 

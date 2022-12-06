@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const ExtRecipeSearch = () => {
     const [searchKey, setSearchKey] = useState('')
     const { recipes, loading } = useSelector((state) => state.ext_recipe)
+    const { currentUser } = useSelector((state) => state.users)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(findRecipeBySearchKeyThunk(searchKey))
@@ -30,9 +31,9 @@ const ExtRecipeSearch = () => {
                 </li>
                 {
                     recipes && recipes.map((recipe) =>
-                        <li key={recipe.recipeID} className="list-group-item">
+                        <li key={recipe.idMeal} className="list-group-item">
                             <img alt="" src={recipe.strMealThumb} height={50} />
-                            <Link to={`/details/${recipe.recipeID}`}>
+                            <Link to={`/details/${recipe.idMeal}`}>
                                 {recipe.strMeal}
                             </Link>
                         </li>

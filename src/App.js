@@ -11,6 +11,7 @@ import Login from "./users/login";
 import usersReducer from "./users/users-reducer";
 import extRecipeReducer from "./ext-recipe/ext-recipe-reducer";
 import ExtRecipeSearch from "./ext-recipe/ext-recipe-search";
+import ExtRecipeDetails from "./ext-recipe/ext-recipe-detail";
 
 import { configureStore } from "@reduxjs/toolkit";
 const store = configureStore({
@@ -33,6 +34,7 @@ function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/search" element={<ExtRecipeSearch />} />
+                        <Route path="/details/:recipeID" element={<ExtRecipeDetails />} />
                     </Routes>
 
                 </BrowserRouter>

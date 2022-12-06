@@ -10,5 +10,6 @@ export const findRecipeBySearchKey = async (search_key) => {
 
 export const findRecipeById = async (recipeID) => {
     const response = await axios.get(`${DETAILS_URL}${recipeID}`)
-    return response.data
+    console.log(response.data.meals[0])
+    return response.data.meals[0]
 }

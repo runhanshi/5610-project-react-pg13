@@ -2,61 +2,41 @@ import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { findRecipeByIdThunk } from "./ext-recipe-thunks";
-import { createReviewThunk, findReviewsByMovieThunk } from "../reviews/reviews-thunks";
 import { Link } from "react-router-dom";
+import RecipeTable from "./recipe-table";
 
 const ExtRecipeDetails = () => {
-    const { imdbID } = useParams()
-    const [review, setReview] = useState('')
-    const { reviews } = useSelector((state) => state.reviews)
-    const { details } = useSelector((state) => state.omdb)
+    const { recipeID } = useParams()
+    const { details } = useSelector((state) => state.ext_recipe)
     const { currentUser } = useSelector((state) => state.users)
     const dispatch = useDispatch()
     useEffect(() => {
-        dispatch(findMovieByImdbIdThunk(imdbID))
-        dispatch(findReviewsByMovieThunk(imdbID))
+        dispatch(findRecipeByIdThunk(recipeID))
     }, [])
-    const handlePostReviewBtn = () => {
-        dispatch(createReviewThunk({
-            review,
-            imdbID
-        }))
+    const ingredientMatrix = [[]]
+    for (var i = 1; i <= 20; i += 1) {
+        if (details[`strIngredient${i}`]) {
+            let ingredient = details[`strIngredient${i}`]
+            let measure = details[`strMeasure${i}`]
+            ingredient = ingredient.charAt(0).toUpperCase() + ingredient.slice(1);
+            measure = measure.charAt(0).toUpperCase() + measure.slice(1);
+            const combine = [ingredient, measure]
+            ingredientMatrix.push(combine)
+        }
     }
     return (
         <>
-            <h1>{details.Title}</h1>
+            <h1>{details.strMeal}</h1>
             <div className="row">
                 <div className="col">
-                    <ul className="list-group">
-                        <li className="list-group-item">Director: {details.Director}</li>
-                        <li className="list-group-item">Released: {details.Released}</li>
-                    </ul>
-                </div>
-                <div className="col">
-                    <img src={details.Poster} />
+                    <img alt="" src={details.strMealThumb} height={500} />
                 </div>
             </div>
-            {
-                currentUser &&
-                <div>
-                    <textarea
-                        onChange={(e) => setReview(e.target.value)}
-                        className="form-control"></textarea>
-                    <button onClick={handlePostReviewBtn}>Post Review</button>
-                </div>
-            }
-            <ul className="list-group">
-                {
-                    reviews.map((review) =>
-                        <li className="list-group-item">
-                            {review.review}
-                            <Link to={`/profile/${review.author._id}`} className="float-end">
-                                {review.author.username}
-                            </Link>
-                        </li>
-                    )
-                }
-            </ul>
+            <div>
+                <h2>Ingredients</h2>
+                <RecipeTable param={ingredientMatrix}></RecipeTable>
+            </div>
+
             <pre>
                 {JSON.stringify(details, null, 2)}
             </pre>

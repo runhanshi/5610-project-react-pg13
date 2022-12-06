@@ -7,7 +7,6 @@ export const findRecipeBySearchKeyThunk = createAsyncThunk(
         if (search_key.length == 0) {
             return
         }
-        console.log(findRecipeBySearchKey(search_key))
         return findRecipeBySearchKey(search_key)
     }
 )
