@@ -20,7 +20,9 @@ export const register = async (user) => {
 }
 
 export const login = async (user) => {
+    console.log("login start")
     const response = await api.post(`${BASE_API_URL}/login`, user)
+    console.log("login success")
     console.log(response.data)
     return response.data
 }
