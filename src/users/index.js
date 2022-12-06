@@ -3,16 +3,10 @@ import * as service from './users-service'
 import {useDispatch, useSelector} from "react-redux";
 import {findAllUsersThunk} from "./users-thunks";
 
-const UserList = () => {
-    // const [users, setUsers] = useState([])
-    const {users} = useSelector((state) => state.users)
-    // const findAllUsers = async () => {
-    //     const users = await service.findAllUsers()
-    //     setUsers(users)
-    // }
+const Users = () => {
+    const {users, loading} = useSelector((state) => state.users)
     const dispatch = useDispatch()
     useEffect(() => {
-        // findAllUsers()
         dispatch(findAllUsersThunk())
     }, [])
     return(
@@ -21,8 +15,7 @@ const UserList = () => {
             <ul className="list-group">
                 {
                     users.map((user) =>
-                        <li className="list-group-item"
-                            key={user._id}>
+                        <li key={user._id} className="list-group-item">
                             {user.username}
                         </li>
                     )
@@ -32,4 +25,4 @@ const UserList = () => {
     )
 }
 
-export default UserList
+export default Users

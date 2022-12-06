@@ -3,10 +3,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {loginThunk, registerThunk} from "./users-thunks";
 
 const Login = () => {
+    const {currentUser} = useSelector((state) => state.users)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
-    const {currentUser} = useSelector((state) => state.users)
+
     const dispatch = useDispatch()
     const handleLoginBtn = () => {
         setError(null)
